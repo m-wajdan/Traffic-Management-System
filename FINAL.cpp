@@ -194,6 +194,7 @@ public:
 };
 
 int main() {
+    int x=0;
     Graph cityGraph;
 
     cityGraph.loadRoadNetwork("road_network.csv");
