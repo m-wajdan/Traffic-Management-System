@@ -35,6 +35,7 @@ public:
 class Graph {
 private:
     Vertex* head;
+    Vertex * tail;
 
     Vertex* getVertex(char id) {
         Vertex* temp = head;
@@ -122,15 +123,27 @@ void RoadNetwork(const string& filename) {
 }
 
 public:
-    Graph() : head(nullptr) {}
+    Graph() : head(nullptr), tail(nullptr) {}
 
-    void addVertex(char id) {
+    void addVertexHead(char id) {
         if (!getVertex(id)) {
             Vertex* newVertex = new Vertex(id);
             newVertex->next = head;
             head = newVertex;
         }
     }
+    void addVertex(char id) {
+    if (!getVertex(id)) {
+        Vertex* newVertex = new Vertex(id);
+        if (head == nullptr) {
+            head = newVertex;
+            tail = newVertex;
+        } else {
+            tail->next = newVertex;
+            tail = newVertex;
+        }
+    }
+}
 
     void addEdge(char start, char end, int weight, bool isBlocked = false, bool underConstruction = false) {
         addVertex(start);
